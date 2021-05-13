@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8" />
+  <title>Jerome Dane's availability</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 0;
+    }
+    * {
+      font-family: 'Roboto', sans-serif;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: flex;
+      align-items: stretch;
+    }
+    .margin {
+      padding: 0 1em;
+    }
+    #subheader {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    #controls {
+      visibility: hidden;
+    }
+    @media only screen and (max-width: 800px) {
+      #subheader {
+        display: block;
+      }
+    }
+  </style>
+  <script type="application/javascript">
+    var timezones = {
+      eastern: 'America%2FNew_York',
+      central: 'America%2FResolute',
+      mountain: 'America%2FYellowknife',
+      pacific: 'America%2FLos_Angeles'
+    }
+    function setTimezone(value) {
+      var t = timezones[value]
+      if(t) {
+        var calendar = document.getElementById('calendar'),
+            timezoneSelector = document.getElementById('timezoneSelector')
+        calendar.src = calendar.src.replace(/ctz=[^&]+/, 'ctz=' + t)
+        Array.prototype.forEach.call(
+          timezoneSelector.options,
+          function(option, i) {
+            if(option.value == value) timezoneSelector.selectedIndex = i
+          }
+        )
+      }
+    }
+    function setMode(value) {
+      var calendar = document.getElementById('calendar')
+      calendar.src = calendar.src.replace(/mode=[^&]+/, 'mode=' + value)
+      if(value === 'DAY') document.getElementById('modeSelector').selectedIndex = 1
+    }
+    function onLoad() {
+      if(window.innerWidth < 800) setMode('DAY')
+      const [_, timezone] = document.location.search.match(/timezone=([^&]+)/) || []
+      if(timezone) setTimezone(timezone)
+      document.getElementById('controls').style.visibility = 'visible'
+    }
+  </script>
+  <body onload="onLoad()">
+    <div id="header">
+      <div class="margin">
+        <h1>Jerome Dane's Availability</h1>
+        <div id="subheader">
+          <p style="margin-right: 2em;">Please send calendar invites to <strong>jerome.dane@gmail.com</strong></p>
+          <p id="controls">
+            Timezone:
+            <select id="timezoneSelector" onchange="setTimezone(event.target.value)">
+              <option value="eastern">Eastern</option>
+              <option value="central">Central</option>
+              <option value="mountain">Mountain</option>
+              <option value="pacific">Pacific</option>
+            </select>
+            &nbsp;
+            Mode:
+            <select id="modeSelector" onchange="setMode(event.target.value)">
+              <option value="WEEK">Week</option>
+              <option value="DAY">Day</option>
+            </select>
+          </p>
+        </div>
+      </div>
+    </div>
+    <iframe id="calendar" src="https://calendar.google.com/calendar/u/1/embed?src=amVyb21lLmRhbmVAZ21haWwuY29t&src=amRhbmVAd2F5ZmFpci5jb20&showTabs=0&showTitle=0&showPrint=0&showWeekend=0&showCalendars=0&mode=week&ctz=America%2FNew_York" />
+  </body>
+</html>
