@@ -37,13 +37,20 @@
     .margin {
       padding: 0 1em;
     }
-    #subheader {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
+    
     #controls {
       visibility: hidden;
+    }
+    #header {
+      padding: 1em;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #header h1 {
+      margin: 0;
     }
     @media only screen and (max-width: 800px) {
       #subheader {
@@ -86,28 +93,25 @@
   </script>
   <body onload="onLoad()">
     <div id="header">
-      <div class="margin">
-        <h1>Jerome Dane's Availability</h1>
-        <div id="subheader">
-          <p style="margin-right: 2em;">Please send calendar invites to <strong>jerome.dane@gmail.com</strong></p>
-          <p id="controls">
-            Timezone:
-            <select id="timezoneSelector" onchange="setTimezone(event.target.value)">
-              <option value="eastern">Eastern</option>
-              <option value="central">Central</option>
-              <option value="mountain">Mountain</option>
-              <option value="pacific">Pacific</option>
-            </select>
-            &nbsp;
-            Mode:
-            <select id="modeSelector" onchange="setMode(event.target.value)">
-              <option value="WEEK">Week</option>
-              <option value="DAY">Day</option>
-            </select>
-          </p>
-        </div>
+      <h1><a href="https://www.linkedin.com/in/jeromedane/" target="_blank">Jerome Dane</a></h1>
+      <div id="subheader">
+        <p id="controls">
+          Timezone:
+          <select id="timezoneSelector" onchange="setTimezone(event.target.value)">
+            <option value="eastern">Eastern</option>
+            <option value="central">Central</option>
+            <option value="mountain">Mountain</option>
+            <option value="pacific">Pacific</option>
+          </select>
+          &nbsp;
+          Mode:
+          <select id="modeSelector" onchange="setMode(event.target.value)">
+            <option value="WEEK">Week</option>
+            <option value="DAY">Day</option>
+          </select>
+        </p>
       </div>
     </div>
-    <iframe id="calendar" src="https://calendar.google.com/calendar/u/1/embed?src=amVyb21lLmRhbmVAZ21haWwuY29t&src=amVyb21lLmRhbmVAZXZlbmZpbmFuY2lhbC5jb20&mode=week&ctz=America%2FNew_York" />
+    <iframe id="calendar" src="https://calendar.google.com/calendar/embed?src=amVyb21lLmRhbmVAZ21haWwuY29t&src=amVyb21lLmRhbmVAZXZlbmZpbmFuY2lhbC5jb20&src=d6c679fcb1b263f5cbb42efda79a64bad077edd8a275b8a3e2ba6bb42b1ed242%40group.calendar.google.com&mode=week&ctz=America%2FNew_York&showPrint=0&showCalendars=0&showTitle=0"></iframe>
   </body>
 </html>
